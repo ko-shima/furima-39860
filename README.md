@@ -48,7 +48,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shippings
+- has_one    :shipping
 
 ## Shippings テーブル
 
@@ -58,7 +58,7 @@
 | region_id          | integer    | null: false                    |
 | city               | string     | null: false                    |
 | block              | string     | null: false                    |
-| building           | text       |                                |
+| building           | string     |                                |
 | phone_number       | string     | null: false                    |
 | order              | references | null: false, foreign_key: true |
 
