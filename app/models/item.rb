@@ -8,7 +8,9 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :item_name, :description, :imag, presence: true
+  validates :image, presence: true
+  validates :item_name, presence: true, length: { maximum: 40 }
+  validates :description, presence: true, length: { maximum: 1000 }
   validates :category_id, :condition_id, :postage_id, :region_id, :shipping_data_id, numericality: { other_than: 1 } 
   validates :price, presence: true, numericality: {
     only_integer: true,
