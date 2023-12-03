@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.all.order("created_at DESC")
+    #@items = Item.all.order("created_at DESC")
   end
 
   def new
@@ -17,6 +17,8 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  private
 
   def item_params
     params.require(:item).permit(:item_name, :description, :price, :category_id, :condition_id, :postage_id, :region_id, :shipping_data_id, :image).merge(user_id: current_user.id)
