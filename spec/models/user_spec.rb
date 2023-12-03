@@ -68,8 +68,8 @@ RSpec.describe User, type: :model do
       end
       it 'passwordが129文字以上では登録できない' do
         @user.password = Faker::Internet.password(min_length: 129, max_length: 150)
-      @user.password_confirmation = @user.password
-      @user.valid?
+        @user.password_confirmation = @user.password
+        @user.valid?
       expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
       it '姓（全角）が空だと登録できない' do
