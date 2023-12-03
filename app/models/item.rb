@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :image, presence: true
-  validates :user, presence: true
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category_id, :condition_id, :postage_id, :region_id, :shipping_data_id, numericality: { other_than: 1 } 
