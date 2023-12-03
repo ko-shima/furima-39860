@@ -136,14 +136,14 @@
             <%= image_tag item.image.variant(resize: '500x500'), class: "item-img" if item.image.attached?%>
 
             <%# 商品が売れていればsold outを表示しましょう %>
-            <% if item.order.present? %>
+            <%# if item.order.present? %>
               <%# ここに「sold out」と表示する記述をする %>
 
               <div class='sold-out'>
                 <span>Sold Out!!</span>
               </div>
               <%# //商品が売れていればsold outを表示しましょう %>
-            <% end %>
+            <%# end %>
 
 
           </div>
@@ -167,7 +167,7 @@
 
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
       <%# 商品がある場合は表示されないようにしましょう %>
-      <% if @items.nil?%>
+      <% if @items.blank?%>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
