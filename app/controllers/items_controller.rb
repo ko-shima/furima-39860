@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
     user_id = item.user_id
 
-    return if user_signed_in? && current_user.id == user_id
+    return if user_signed_in? && current_user.id == user_id && @item.order.nil?
 
     redirect_to action: :index
   end
