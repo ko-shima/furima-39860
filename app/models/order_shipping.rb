@@ -1,6 +1,6 @@
 class OrderShipping
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :region_id, :city, :block, :building, :phone_number, :order
+  attr_accessor :user_id, :item_id, :postal_code, :region_id, :city, :block, :building, :phone_number, :order, :token
 
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class OrderShipping
     validates :city
     validates :block
     validates :phone_number, format: { with: /\A[0-9]{11}\z/, message: 'is invalid' }
+    validates :token
   end
 
   def save
