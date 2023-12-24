@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe OrderShipping, type: :model do
   before do
-    @order_shipping = FactoryBot.build(:order_shipping)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @order_shipping = FactoryBot.build(:order_shipping, user_id: user.id, item_id: item.id)
   end
 
   describe '配送先情報' do
@@ -24,7 +26,7 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("User can't be blank")
       end
 
-      it "商品IDが空白だと保存できない" do
+      it "商品IDが空白だと保存できない" doP
         @order_shipping.item_id = nil
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Item can't be blank")
