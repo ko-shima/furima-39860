@@ -8,11 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image.variant(resize: '500x500'),class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <div class="sold-out">
-        <span>Sold Out!!</span>
-      </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% if @item.order.present? %>
+        <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -23,16 +23,20 @@
       </span>
     </div>
 
-    <% if user_signed_in? && current_user.id == @item.user_id %>
-
-      <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete }, class:"item-destroy" %>
-      <% elsif user_signed_in?%>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
-
+    <%# ログイン状態であることの条件 %>
+    <% if user_signed_in? %>
+      <%# 出品者&購入済みではない場合 ：商品の編集・削除を表示 %>
+      <% if current_user.id == @item.user_id && @item.order.nil?%>
+        <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete }, class:"item-destroy" %>
+      <%# 購入済の場合 ：なにも表示しない %>
+      <% elsif @item.order.present?%>
+        <%= "SOLD OUT" %>
+      <%# ログイン者&購入済みでない場合 ：購入画面に進むを表示 %>
+      <% else %>
+        <%= link_to "購入画面に進む", item_orders_path(@item.id) ,class:"item-red-btn"%>
+      <% end %>
     <% end %>
 
     <div class="item-explain-box">
