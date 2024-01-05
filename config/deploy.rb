@@ -5,7 +5,7 @@ lock '3.18.0'
 set :application, 'furima-39860'
 
 # どのリポジトリからアプリをpullするかを指定する
-set :repo_url,  'ko-shima/furima-39860.git'
+set :repo_url,  'https://github.com/ko-shima/furima-39860.git'
 set :branch, 'main'
 
 # バージョンが変わっても共通で参照するディレクトリを指定
